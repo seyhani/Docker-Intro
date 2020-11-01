@@ -28,7 +28,6 @@ exit
 ```
 Now, if we close the container's shell, we can login again using using admin user's credentials:
 ```
-exit
 mysql -uadmin -ppass
 ```
 You can also check that the `Test` database exists:
@@ -97,7 +96,7 @@ And then you can verify that the admin user and Test database is existing:
 mysql -uadmin -ppass
 ```
 ```sql
-SHOW DATABASES
+SHOW DATABASES;
 ```
 Remove the MySQL container when you are done:
 ```

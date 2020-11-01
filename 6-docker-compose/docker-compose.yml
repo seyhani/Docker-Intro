@@ -12,7 +12,7 @@ services:
       - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
 
   backend:
-    container_name: todo-backend
+    container_name: todo-backend-container
     build: ./backend
     environment:
       MYSQL_SERVER_HOSTNAME: "${DATABASE_HOSTNAME}"
@@ -23,7 +23,7 @@ services:
       - 8080:8080
 
   frontend:
-    container_name: todo-frontend
+    container_name: todo-frontend-container
     build: ./frontend
     ports:
       - 9090:80

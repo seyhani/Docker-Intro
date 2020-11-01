@@ -23,7 +23,7 @@ mvn clean package
 ```
 Otherwise, you can bring up a temporary `maven` container and build the project inside this container:
 ```
-docker run --rm -v $(pwd):/home/backend repository -w /home/backend  maven:3.6.3-jdk-11 mvn clean package
+docker run --rm -v $(pwd):/home/backend -w /home/backend  maven:3.6.3-jdk-11 mvn clean package
 ```
 > We have attached the current working directory as a volume to the maven container to have access to the backend source code in the container.
 > Instead of getting shell access and executing the `mvn clean package`, we are directly executing the `mvn clean package` command on the container. 
@@ -163,6 +163,8 @@ Now, to bring up all the containers we just need to run:
 ```
 docker-compose up -d
 ```
+> Ensure that you are in the `6-docker-compose` directory.
+
 Like the `docker run` command, the `-d` option brings up the containers in the background. 
 The `up` command is a shortcut for `create` and `start`. Docker compose have similar commands to the docker CLI, but the difference, and also the advantage here is that it only executes the command for the containers that have been specified in the Compose file. Here is a short description of these commands:
 * `create`: Create the containers
@@ -204,7 +206,7 @@ services:
       - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
 
   backend:
-    container_name: todo-backend
+    container_name: todo-backend-container
     build: ./backend
     environment:
       MYSQL_SERVER_HOSTNAME: "${DATABASE_HOSTNAME}"
@@ -215,13 +217,18 @@ services:
       - 8080:8080
 
   frontend:
-    container_name: todo-frontend
+    container_name: todo-frontend-container
     build: ./frontend
     ports:
       - 9090:80
 ```
 
-You can see that in this Compose file, we have removed the `image` property, and instead we have used the `build` property. Here we specified `build` for both frontend and backend services. The `build` property can be specified as a path of the build context. Since we have a `Dockerfile` in each of the frontend and backend directories, we passed these directories as the build context. Now we can instruct Compose to build our images before creating them. Hence, all of the build, creation, and start of our containers can be done using the following command:
+You can see that in this Compose file, we have removed the `image` property, and instead we have used the `build` property. Here we specified `build` for both frontend and backend services. The `build` property can be specified as a path of the build context. Since we have a `Dockerfile` in each of the frontend and backend directories, we passed these directories as the build context. Now we can instruct Compose to build our images before creating them. Hence, all of the build, creation, and start of our containers can be done using the a single command command. 
+To do so first delete the containers that were built previously:
+```
+docker-compose down
+```
+And then bring them up again:
 ```
 docker-compose up -d --build
 ```
