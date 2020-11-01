@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://${MYSQL_SERVER_HOSTNAME}:3306/${MYSQL_SERVER_DATABASE_NAME}
+    username: ${MYSQL_SERVER_USERNAME}
+    password: ${MYSQL_SERVER_PASSWORD}
+    hikari:
+      initialization-fail-timeout: 0
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  data:
+    rest:
+      detection-strategy: annotated
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

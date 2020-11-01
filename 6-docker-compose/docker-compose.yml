@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  mysql:
+    container_name: "${DATABASE_HOSTNAME}"
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DATABASE_PASSWORD}"
+      MYSQL_DATABASE: "${DATABASE_NAME}"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
+
+  backend:
+    container_name: todo-backend
+    build: ./backend
+    environment:
+      MYSQL_SERVER_HOSTNAME: "${DATABASE_HOSTNAME}"
+      MYSQL_SERVER_USERNAME: root
+      MYSQL_SERVER_PASSWORD: "${DATABASE_PASSWORD}"
+      MYSQL_SERVER_DATABASE_NAME: "${DATABASE_NAME}"
+    ports:
+      - 8080:8080
+
+  frontend:
+    container_name: todo-frontend
+    build: ./frontend
+    ports:
+      - 9090:80
