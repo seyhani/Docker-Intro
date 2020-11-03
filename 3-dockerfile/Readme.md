@@ -57,7 +57,7 @@ docker build [OPTIONS] PATH | URL | -
 
 The `build` command accepts a path for the **context** of the build. The context is a directory with a set of files that docker uses for building the image. By default, docker requires a file named `Dockerfile` in the context. Other files in the context are available for use during the image build process. 
 
-Let's build a new version of the `ubuntu-with-greeting`, this time, using a `Dockerfile`. First, change your working directory to `3-docker-file` and run the following command to build the image:
+Let's build a new version of the `ubuntu-with-greeting`, this time, using a `Dockerfile`. First, change your working directory to `3-dockerfile` and run the following command to build the image:
 ```
 docker image build -t ubuntu-with-greeting:v2 ./
 ```
