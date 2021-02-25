@@ -7,4 +7,4 @@ It is expected that, after completing this tutorial, you will be able to use con
 * [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/docker/)
 * [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
 * [Docker Compose CLI Reference](https://docs.docker.com/compose/reference/overview/)
-* [Compose File Reference](https://docs.docker.com/engine/reference/builder/)
+* [Compose File Reference](https://docs.docker.com/compose/compose-file/compose-file-v3/)
